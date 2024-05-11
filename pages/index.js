@@ -3,7 +3,8 @@ import {
   Heading,
   Grid,
   Center,
-  VStack
+  VStack,
+  Text
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import Form from '../components/Form';
