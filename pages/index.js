@@ -114,7 +114,8 @@ export default function App({ subject, trialList, instructionList, block_order }
             />
             :
             <VStack spacing={16}>
-              <Heading>Speed Dating Experiment - Masking</Heading>
+              <Heading>Welcome!</Heading>
+              <Text>* Please fill in the form below and submit to start the experiment.</Text>
               <Form
                 subject={subject}
                 setSex={setSex}
