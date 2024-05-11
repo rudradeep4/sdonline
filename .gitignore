@@ -19,6 +19,8 @@
 # misc
 .DS_Store
 *.pem
+practice_trials.json
+trials.json
 
 # debug
 npm-debug.log*
