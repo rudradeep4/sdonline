@@ -37,17 +37,17 @@ import { MongoClient } from "mongodb"
 export default async function handler(req, res) {
     switch (req.method) {
         case 'POST': {
-            return addSong(req, res);
+            return addResponse(req, res);
         }
     }
 }
 
-async function addSong(req, res) {
+async function addResponse(req, res) {
 
     try {
         // connect to the database
         const client = await MongoClient.connect(process.env.MONGODB_URI)
-        const db = client.db('CLuster0')
+        const db = client.db('Cluster0')
 
         // update with response
         const filter = { video_path: data.trialId };
