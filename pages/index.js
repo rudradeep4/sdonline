@@ -10,13 +10,17 @@ import Form from '../components/Form';
 import Instructions from '../components/Instructions';
 import Trial from '../components/Trial';
 import { instructions } from '../instructions'
-import fetch from 'isomorphic-unfetch'
+// import fetch from 'isomorphic-unfetch'
 var _ = require('lodash')
+import { MongoClient } from 'mongodb';
 
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/trials`);
-  const json = await res.json();
+  const client = await MongoClient.connect(process.env.MONGODB_URL)
+
+  const db = client.db('Cluster0')
+  const res = await db.collection('trials').find({}).toArray()
+  const json = JSON.parse(JSON.stringify(res))
 
   const blocks = _.flatten(['practice', _.shuffle(['eyes', 'mouth', 'nods', 'original'])])
 

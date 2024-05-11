@@ -1,14 +1,14 @@
 import nextConnect from 'next-connect';
-import middleware from '../../middleware/database';
+// import middleware from '../../middleware/database';
 
 const handler = nextConnect()
 
 handler.use(middleware)
 
-handler.get(async (req, res) => {
-    let doc = await req.db.collection('trials').find().toArray()
-    res.json(doc)
-})
+// handler.get(async (req, res) => {
+//     let doc = await req.db.collection('trials').find().toArray()
+//     res.json(doc)
+// })
 
 handler.post(async (req, res) => {
     let data = req.body;

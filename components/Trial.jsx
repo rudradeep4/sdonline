@@ -34,7 +34,7 @@ export default function Trial({ trial, count, setCount, setView, subject, age, s
             "count": count,
             "response": sliderResp ? sliderResp : 5
         }
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/trials`, {
+        const res = await fetch('/api/trials', {
             method: 'post',
             body: JSON.stringify(response)
         })
