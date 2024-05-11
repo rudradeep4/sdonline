@@ -15,7 +15,7 @@ var _ = require('lodash')
 
 
 export async function getStaticProps() {
-  const res = await fetch('/api/trials');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/trials`);
   const json = await res.json();
 
   const blocks = _.flatten(['practice', _.shuffle(['eyes', 'mouth', 'nods', 'original'])])
