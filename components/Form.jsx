@@ -7,7 +7,8 @@ import {
   HStack,
   Stat,
   StatLabel,
-  StatNumber
+  StatNumber,
+  Divider
 } from "@chakra-ui/react";
 import { Formik, Field } from "formik";
 
@@ -35,6 +36,8 @@ export default function Form({ subject, setAge, setSex, setView }) {
                     <StatLabel fontSize={'xl'} fontWeight={'bold'}>Subject</StatLabel>
                     <StatNumber fontSize={'xl'}># {subject}</StatNumber>
                 </Stat>
+
+                <Divider />
 
                 <FormControl isRequired>
                     <FormLabel>Age</FormLabel>

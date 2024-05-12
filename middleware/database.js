@@ -1,20 +1,17 @@
-// import { MongoClient } from 'mongodb';
-// import nextConnect from 'next-connect';
+import { MongoClient } from 'mongodb';
+import nextConnect from 'next-connect';
 
-// // const client = new MongoClient(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xckv1my.mongodb.net/`, {
-// const client = new MongoClient(process.env.MONGODB_URL, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
 
-// async function database(req, res, next) {
-//   req.dbClient = client
-//   req.db = client.db('Cluster0')
-//   return next()
-// }
+const client = new MongoClient(process.env.MONGODB_URL)
 
-// const middleware = nextConnect()
+async function database(req, res, next) {
+  req.dbClient = client
+  req.db = client.db('Cluster0')
+  return next()
+}
 
-// middleware.use(database)
+const middleware = nextConnect()
 
-// export default middleware
+middleware.use(database)
+
+export default middleware

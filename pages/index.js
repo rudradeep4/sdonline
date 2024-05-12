@@ -10,8 +10,8 @@ import { useState, useEffect } from 'react';
 import Form from '../components/Form';
 import Instructions from '../components/Instructions';
 import Trial from '../components/Trial';
+import Task from '../components/Task';
 import { instructions } from '../instructions'
-// import fetch from 'isomorphic-unfetch'
 var _ = require('lodash')
 import { MongoClient } from 'mongodb';
 
@@ -25,22 +25,24 @@ export async function getStaticProps() {
 
   const blocks = _.flatten(['practice', _.shuffle(['eyes', 'mouth', 'nods', 'original'])])
 
-  const data = _.flatten(
-    _.concat(
-      blocks.map((b) => _.shuffle(_.filter(json, ['block', b])))
+  const data = 
+    _.flatten(
+      _.concat(
+        blocks.map((b) => _.shuffle(_.filter(json, ['block', b])))
+      )
     )
-  )
 
-  const max_id = _.max(
-    _.map(
-      _.flatten(
-        _.compact(
-          data.map(t => _.get(t, 'responses', 0))
-        )
-      ), 'subject'
+  const max_id = 
+    _.max(
+      _.map(
+        _.flatten(
+          _.compact(
+            data.map(t => _.get(t, 'responses', 0))
+          )
+        ), 'subject'
+      )
     )
-  )
-  const subject = max_id ? max_id+1 : 0
+  const subject = (_.isNull(max_id) || _.isUndefined(max_id)) ? 0 : max_id+1
 
   return {
       props: {
@@ -55,10 +57,13 @@ export async function getStaticProps() {
 
 export default function App({ subject, trialList, instructionList, block_order }) {
 
+  const blockCounts = _.countBy(trialList, 'block')
   const nTrials = trialList.length
-
-  const [view, setView] = useState('')
+  const nPractice = blockCounts.practice
+  const nDeviant = blockCounts.original
+  
   const [count, setCount] = useState(0)
+  const [view, setView] = useState('')
   const [kind, setKind] = useState('')
 
   const [age, setAge] = useState()
@@ -68,23 +73,20 @@ export default function App({ subject, trialList, instructionList, block_order }
     if (count == 0) {
       setKind('start')
     }
-    else if (count == nTrials) {
-      setKind('end')
-    }
-    else if (count == 4) {
+    else if (count == nPractice) {
       setKind('practice_end')
     }
-    else if (count == 44) {
+    else if (count == nPractice+(nDeviant)) {
       setKind('break1')
     }
-    else if (count == 84) {
+    else if (count == nPractice+(nDeviant*2)) {
       setKind('break2')
     }
-    else if (count == 124) {
+    else if (count == nPractice+(nDeviant*3)) {
       setKind('break3')
     }
-    else {
-      setKind('trial')
+    else if (count == nTrials) {
+      setKind('end')
     }
   }, [count])
 
@@ -105,6 +107,13 @@ export default function App({ subject, trialList, instructionList, block_order }
             ?
             <Trial 
               trial={trialList[count]}
+              setView={setView} 
+            />
+            :
+            (view == 'task')
+            ?
+            <Task
+              trial={trialList[count]}
               count={count} 
               setCount={setCount} 
               setView={setView} 
@@ -112,6 +121,9 @@ export default function App({ subject, trialList, instructionList, block_order }
               age={age}
               sex={sex}
               order={block_order}
+              nTrials={nTrials}
+              nDeviant={nDeviant}
+              nPractice={nPractice}
             />
             :
             <VStack spacing={16}>
