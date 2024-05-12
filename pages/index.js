@@ -56,7 +56,7 @@ export async function getStaticProps() {
 
 
 export default function App({ subject, trialList, instructionList, block_order }) {
-
+  console.log(subject)
   const blockCounts = _.countBy(trialList, 'block')
   const nTrials = trialList.length
   const nPractice = blockCounts.practice
