@@ -16,7 +16,7 @@ var _ = require('lodash')
 import { MongoClient } from 'mongodb';
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const client = await MongoClient.connect(process.env.MONGODB_URL)
 
   const db = client.db('Cluster0')
