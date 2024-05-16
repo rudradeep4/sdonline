@@ -20,10 +20,11 @@ export async function getServerSideProps() {
   const client = await MongoClient.connect(process.env.MONGODB_URL)
 
   const db = client.db('Cluster0')
-  const res = await db.collection('trials').find({}).toArray()
+  const res = await db.collection('trials_sansNods').find({}).toArray()
   const json = JSON.parse(JSON.stringify(res))
 
-  const blocks = _.flatten(['practice', _.shuffle(['eyes', 'mouth', 'nods', 'original'])])
+  // const blocks = _.flatten(['practice', _.shuffle(['eyes', 'mouth', 'nods', 'original'])])
+  const blocks = _.flatten(['practice', _.shuffle(['eyes', 'mouth', 'original'])])
 
   const data = 
     _.flatten(
@@ -56,7 +57,7 @@ export async function getServerSideProps() {
 
 
 export default function App({ subject, trialList, instructionList, block_order }) {
-  console.log(subject)
+
   const blockCounts = _.countBy(trialList, 'block')
   const nTrials = trialList.length
   const nPractice = blockCounts.practice
@@ -82,9 +83,9 @@ export default function App({ subject, trialList, instructionList, block_order }
     else if (count == nPractice+(nDeviant*2)) {
       setKind('break2')
     }
-    else if (count == nPractice+(nDeviant*3)) {
-      setKind('break3')
-    }
+    // else if (count == nPractice+(nDeviant*3)) {
+    //   setKind('break3')
+    // }
     else if (count == nTrials) {
       setKind('end')
     }

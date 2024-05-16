@@ -21,7 +21,7 @@ handler.post(async (req, res) => {
         }}
     };
 
-    let result = await req.db.collection('trials').updateOne(filter, updateDoc)
+    let result = await req.db.collection('trials_sansNods').updateOne(filter, updateDoc)
     res.json({message: 'ok'});
 })
 

@@ -1,0 +1,41 @@
+[
+ {
+   "video_path": "./stimuli/original/24_4.mov",
+   "condition": "true",
+   "duration": 8,
+   "dyad": 24,
+   "mouth_fit": 0.151357872,
+   "eye_fit": -0.263334073,
+   "genuineness": 0.428571429,
+   "category": "miss",
+   "block": "practice",
+   "audio_path": "./stimuli/audio/24/4_audio.wav",
+   "source": "https://www.dropbox.com/scl/fi/2tt72qfherjj41ydnhvkn/24_4.mov?rlkey=60wee3px345kmcxevz59w2ysa&dl=0"
+ },
+ {
+   "video_path": "./stimuli/mouth/11_8.mov",
+   "condition": "true",
+   "duration": 24,
+   "dyad": 11,
+   "mouth_fit": 0.12800017,
+   "eye_fit": 0.001888068,
+   "genuineness": 0.4,
+   "category": "miss",
+   "block": "practice",
+   "audio_path": "./stimuli/audio/11/8_audio.wav",
+   "source": "https://www.dropbox.com/scl/fi/5ent1xwqal58o64rxo0s2/11_8.mov?rlkey=qh4fnyvj89pnrjqetdzskrvqf&dl=0"
+ },
+ {
+   "video_path": "./stimuli/eyes/49_2_5.mov",
+   "condition": "fake",
+   "duration": 9,
+   "dyad": 49,
+   "mouth_fit": -0.089493679,
+   "eye_fit": 0.280632843,
+   "genuineness": 0.285714286,
+   "category": "cr",
+   "block": "practice",
+   "audio_path": "./stimuli/audio/49/2_5_audio.wav",
+   "source": "https://www.dropbox.com/scl/fi/7o7xchsfj6f0jyljb27gt/49_2_5.mov?rlkey=6sffehh1sox6f07qdpeevk19z&dl=0"
+ }
+]
